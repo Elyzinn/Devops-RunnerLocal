@@ -1,0 +1,48 @@
+services:
+
+  app-php:
+    build:
+      context: ./src/php
+      dockerfile: Dockerfile
+    container_name: app-php
+    ports:
+      - "8080:80"
+
+    environment:
+      DB_HOST: database
+      DB_USER: sudosu
+      DB_PASSWORD: simplicidade2
+      DB_NAME: crudPrateleira
+
+    volumes:
+      - ./src:/var/www/html
+
+    depends_on:
+      - database
+    networks:
+      - local_network
+
+  database:
+    image: postgres:15.3-alpine
+    container_name: database
+    restart: always
+    environment:
+      POSTGRES_DB: crudPrateleira
+      # automaticamente cria uma banco com este nome
+      # tirando a necessidade de ter o USE crudPrateleira no db.sql
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: testepost
+    ports:
+      - 5440:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+    networks:
+      - local_network
+
+volumes:
+  postgres_data:
+
+networks:
+  local_network:
+    driver: bridge
