@@ -1,0 +1,15 @@
+name: HealthCheck-Container
+
+on:
+  workflow_dispatch:
+
+uses: zethuman/healthcheck@v0.0.1
+with:
+  name: app-php
+  timeout: 120
+  interval: 2
+
+  name: database
+  timeout: 120
+  interval: 2
+  
