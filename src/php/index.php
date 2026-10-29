@@ -22,7 +22,7 @@ $mensagem = $mensagens[$_GET['sucesso'] ?? ''] ?? '';
         <header class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
             <div>
                 <p class="text-secondary text-uppercase fw-semibold small mb-1">Catálogo</p>
-                <h1 class="mb-0">Jogos</h1>
+                <h1 class="mb-0">Games</h1>
             </div>
             <div class="d-flex align-items-center gap-3">
                 <span class="text-secondary"><?= count($games) ?> <?= count($games) === 1 ? 'jogo cadastrado' : 'jogos cadastrados' ?></span>
