@@ -4,24 +4,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    - uses: actions/checkout@v4
-    -run: |
-      docker compose -d --build
-      docker ps
-    
-  healthcheck:
+  build-healthcheck:
     runs-on: ubuntu-latest
     steps:
-      - name: Healthcheck-app-php
-        uses: zethuman/healthcheck@v0.0.1
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: Subir containers
+          run: |
+            docker compose -d --build
+            docker ps
+        
+        - name: Healthcheck-app-php
+          uses: zethuman/healthcheck@v0.0.1
           with:
             name: app-php
             timeout: 120
             interval: 2
-      - name: Healthcheck-database
-        uses: zethuman/healthcheck@v0.0.1
+          
+        - name: Healthcheck-database
+          uses: zethuman/healthcheck@v0.0.1
           with:
             name: database
             timeout: 120
