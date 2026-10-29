@@ -12,7 +12,7 @@ jobs:
 
         - name: Subir containers
           run: |
-            docker compose -d --build
+            docker compose up -d --build
             docker ps
         
         - name: Healthcheck-app-php
