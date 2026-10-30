@@ -20,8 +20,8 @@ services:
 
     environment:
       DB_HOST: database
-      DB_USER: sudosu
-      DB_PASSWORD: simplicidade2
+      DB_USER: postgres
+      DB_PASSWORD: testepost
       DB_NAME: crudPrateleira
     
     labels:
@@ -64,7 +64,7 @@ services:
       - autoheal=true
     
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d crudPrateleira"]
       interval: 5s
       timeout: 3s
       retries: 20
