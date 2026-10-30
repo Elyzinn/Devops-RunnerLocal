@@ -13,7 +13,6 @@ jobs:
         - name: Subir containers
           run: |
             docker compose up -d --build
-            docker ps
         
         - name: Healthcheck-app-php
           uses: zethuman/healthcheck@v0.0.1
@@ -28,4 +27,9 @@ jobs:
             name: database
             timeout: 120
             interval: 2
+        - name: Logs em caso de falha
+          if: failure()
+          run: |
+            docker ps -a
+            docker compose logs
   
