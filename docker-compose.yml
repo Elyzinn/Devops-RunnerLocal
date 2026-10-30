@@ -23,6 +23,9 @@ services:
       DB_USER: sudosu
       DB_PASSWORD: simplicidade2
       DB_NAME: crudPrateleira
+    
+    labels:
+      - autoheal=true
 
     volumes:
       - ./src:/var/www/html
@@ -56,6 +59,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+
+    labels:
+      - autoheal=true
     
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
