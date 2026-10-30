@@ -28,7 +28,7 @@ services:
       - autoheal=true
 
     volumes:
-      - ./src:/var/www/html
+      - ./src/php:/var/www/html
 
     depends_on:
       database:
